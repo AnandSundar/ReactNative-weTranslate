@@ -3,21 +3,89 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  TextInput,
+  TouchableHighlight
 } from 'react-native';
 
 export default class TranslateInput extends Component<{}> {
+  constructor(){
+    super();
+    this.state = {
+      translateString: ''
+    }
+  }
+
   render() {
     return (
-      <View>
-        <Text>
-          Translate Input
+      <View style={styles.container}>
+        <Text style={styles.description}>
+          Translate A Word
         </Text>
+        <View style={styles.row}>
+          <TextInput
+            underlineColorAndroid='transparent'
+            style = {styles.translateInput}
+            onChangeText = {(value) => this.setState({translateString: value})}
+            placeholder="Enter a word..."
+          />
+          <TouchableHighlight
+            style={styles.button}
+            onPress={() => {this.props.onSubmit(this.state.translateString)}}
+            underlaycolor='#99d9f4'
+          >
+          <Text style={styles.buttonText}> Go</Text>
+
+          </TouchableHighlight>
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  description: {
+    marginBottom: 20,
+    fontSize: 18,
+    textAlign: 'center',
+    color: '#656865'
+  },
+  container: {
+    padding: 30,
+    marginTop: 65,
+    alignItems: 'center'
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'stretch'
+  },
+  button: {
+    height: 36,
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#48bbec',
+    borderColor: '#48bbec',
+    borderWidth: 1,
+    borderRadius: 8,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  translateInput: {
+    height: 36,
+    padding: 4,
+    marginRight: 5,
+    flex: 4,
+    fontSize: 18,
+    borderColor: '#48bbec',
+    borderRadius: 8,
+    color: '#48bbec',
+    borderWidth: 1
+  }
 
 });
