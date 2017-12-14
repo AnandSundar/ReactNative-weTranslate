@@ -29,7 +29,8 @@ export default class App extends Component<{}> {
   translateText(text) {
       //query the api to translate word
       fetch('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20171214T032908Z.d7c982b93716a859.8b81cb08bb7b160a3d01da62283e3ef8e71b96cc&lang='+this.state.language+'&text='+text).then((response) => {
-        console.log(response);
+        let res = JSON.parse(response._bodyText);
+        this.setState({translatedText: res.text[0]});
       });
   }
 
@@ -37,8 +38,8 @@ export default class App extends Component<{}> {
     return (
       <View style={styles.container}>
         <LanguageSelect language={this.state.language} onSelect={this.selectLanguage.bind(this)}/>
-        <TranslateInput onSubmit={this.translateText.bind(this)}/>
-        <TranslateOutput />
+        <TranslateInput onSubmit={this.translateText.bind(this)} />
+        <TranslateOutput translation={this.state.translatedText} />
       </View>
     );
   }

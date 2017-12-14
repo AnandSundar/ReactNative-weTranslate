@@ -10,8 +10,8 @@ export default class TranslateOutput extends Component<{}> {
   render() {
     return (
       <View>
-        <Text>
-          Translate Output
+        <Text style={styles.translatedText}>
+          {this.props.translation}
         </Text>
       </View>
     );
@@ -19,5 +19,9 @@ export default class TranslateOutput extends Component<{}> {
 }
 
 const styles = StyleSheet.create({
-
+  translatedText: {
+    fontSize: 23,
+    textAlign: 'center',
+    color: '#656565'
+  }
 });
